@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: tomaszskora
+Build-Jdk: 9.0.1
+Implementation-Title: SchoolWebApp
+Implementation-Version: 1.0
+Implementation-Vendor-Id: pl.edu.agh.ki.mwo.web
+Implementation-Vendor: Pivotal Software, Inc.
+Main-Class: pl.edu.agh.ki.mwo.web.app.Application
+Created-By: Maven Integration for Eclipse
+

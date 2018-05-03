@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<body>
+
+
+
+    <span layout:fragment="pageTitle"> - Klasy </span>
+
+    <div layout:fragment="content">
+    	<div th:include="menuFragment" ></div>
+		<br/><Br/>
+		<table border="1" cellpadding="5">
+			<tr><th>Id</th><th>Rok rozpoczęcia</th><th>Obecny rok</th><th>Profil</th><th>Szkoła</th><th>Usuń</th><th>Edytuj</th></tr>
+			<tr th:each="schoolClass: ${schoolClasses}">
+				<td><span th:text="${schoolClass.id}" /></td>
+				<td><span th:text="${schoolClass.startYear}" /></td>
+				<td><span th:text="${schoolClass.currentYear}" /></td>
+				<td><span th:text="${schoolClass.profile}" /></td>
+				<td><span th:text="${schoolClass.school}" /></td>
+		        <td>
+		            <form action="DeleteSchoolClass" method="POST">
+		            	<input type="hidden" name="schoolClassId" th:value="${schoolClass.id}" />
+		                <button type="submit">X</button>
+		            </form>
+		        </td>
+		        <td>
+		        	<form action="UpdateSchoolClass" method="POST">
+		        		<input type="hidden" name="schoolClassId" th:value="${schoolClass.id}" />
+		            	<label>Rok rozpoczęcia: </label><input type="text" name="schoolClassStartYear" th:value="${schoolClass.startYear}" /><br/>
+		            	<label>Obecny rok: </label><input type="text" name="schoolClassCurrentYear" th:value="${schoolClass.currentYear}" /><br/>
+		                <label>Profil: </label><input type="text" name="schoolClassProfile" th:value="${schoolClass.profile}" /><br/>
+		                <label>Szkoła: </label><select class="form-control" name="schoolClassSchool" id="schoolClassSchool">
+											   <option id="check" value="-1">---bez zmian---</option>
+											   <option th:each="school: ${schools}" th:value="${school.id}" th:text="${school.name} + ', ' + ${school.address}"></option>
+											   </select><br/>
+		                <button type="submit">></button>
+		        	</form>
+		        </td>
+			</tr>
+		
+		
+		</table><br/><a href='AddSchoolClass'>dodaj klasę</a><br/><br/>
+		
+    </div>
+
+</body>
+</html>
