@@ -22,7 +22,8 @@ public class Student implements java.io.Serializable {
 	@Transient
 	private SchoolClass schoolClass;
 	
-	@Transient
+	@ManyToOne
+	@JoinColumn(name="class_id")
 	private School school;
 	
 	public long getId() {

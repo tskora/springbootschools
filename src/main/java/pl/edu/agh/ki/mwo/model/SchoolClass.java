@@ -25,7 +25,8 @@ public class SchoolClass implements java.io.Serializable {
 	@JoinColumn(name="class_id")
 	private Set<Student> students;
 	
-	@Transient
+	@ManyToOne
+	@JoinColumn(name="school_id")
 	private School school;
 
 	public SchoolClass() {

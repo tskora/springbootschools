@@ -33,7 +33,7 @@ public class DatabaseConnector {
 		instance = null;
 	}
 	
-	private void updateBackReferences() {
+/*	private void updateBackReferences() {
 		String hql = "FROM School";
 		Query query = session.createQuery(hql);
 		List<School> schools = query.list();
@@ -47,10 +47,10 @@ public class DatabaseConnector {
 				}
 			}
 		}
-	}
+	}*/
 	
 	public Iterable<School> getSchools() {
-		updateBackReferences();
+		//updateBackReferences();
 		
 		String hql = "FROM School";
 		Query query = session.createQuery(hql);
@@ -70,11 +70,10 @@ public class DatabaseConnector {
 		Query query = session.createQuery(hql);
 		List<School> results = query.list();
 		Transaction transaction = session.beginTransaction();
-		for (School s : results) {
-			s.setName(name);
-			s.setAddress(address);
-			session.update(s);
-		}
+		School s = results.get(0);
+		s.setName(name);
+		s.setAddress(address);
+		session.update(s);
 		transaction.commit();
 	}
 	
@@ -83,14 +82,13 @@ public class DatabaseConnector {
 		Query query = session.createQuery(hql);
 		List<School> results = query.list();
 		Transaction transaction = session.beginTransaction();
-		for (School s : results) {
-			session.delete(s);
-		}
+		School s = results.get(0);
+		session.delete(s);
 		transaction.commit();
 	}
 
 	public Iterable<SchoolClass> getSchoolClasses() {
-		updateBackReferences();
+		//updateBackReferences();
 
 		String hql = "FROM SchoolClass";
 		Query query = session.createQuery(hql);
@@ -104,13 +102,9 @@ public class DatabaseConnector {
 		Query query = session.createQuery(hql);
 		List<School> results = query.list();
 		Transaction transaction = session.beginTransaction();
-		if (results.size() == 0) {
-			session.save(schoolClass);
-		} else {
-			School school = results.get(0);
-			school.addClass(schoolClass);
-			session.save(school);
-		}
+		School school = results.get(0);
+		school.addClass(schoolClass);
+		session.save(school);
 		transaction.commit();
 	}
 	
@@ -126,20 +120,19 @@ public class DatabaseConnector {
 			school = results2.get(0);
 		}
 		Transaction transaction = session.beginTransaction();
-		for (SchoolClass s : results) {
-			School oldSchool = s.getSchool();
-			s.setProfile(profile);
-			s.setStartYear(startYear);
-			s.setCurrentYear(currentYear);
-			if (results2.size() != 0) {
-				if (oldSchool != null) {
-					oldSchool.getClasses().remove(s);
-				}
-				s.setSchool(school);
-				school.addClass(s);
+		SchoolClass s = results.get(0);	
+		School oldSchool = s.getSchool();
+		s.setProfile(profile);
+		s.setStartYear(startYear);
+		s.setCurrentYear(currentYear);
+		if (results2.size() != 0) {
+			if (oldSchool != null) {
+				oldSchool.getClasses().remove(s);
 			}
-			session.update(s);
+			s.setSchool(school);
+			school.addClass(s);
 		}
+		session.update(s);
 		transaction.commit();
 	}
 	
@@ -155,7 +148,7 @@ public class DatabaseConnector {
 	}
 	
 	public Iterable<Student> getStudents() {
-		updateBackReferences();
+		//updateBackReferences();
 
 		String hql = "FROM Student";
 		Query query = session.createQuery(hql);
@@ -192,21 +185,20 @@ public class DatabaseConnector {
 			schoolClass = results2.get(0);
 		}
 		Transaction transaction = session.beginTransaction();
-		for (Student s : results) {
-			SchoolClass oldClass = s.getSchoolClass();
-			s.setName(name);
-			s.setSurname(surname);
-			s.setPesel(pesel);
-			if (results2.size() != 0) {
-				if (oldClass != null) {
-					oldClass.getStudents().remove(s);
-				}
-				s.setSchoolClass(schoolClass);
-				schoolClass.addStudent(s);
-				s.setSchool(schoolClass.getSchool());
+		Student s = results.get(0);
+		SchoolClass oldClass = s.getSchoolClass();
+		s.setName(name);
+		s.setSurname(surname);
+		s.setPesel(pesel);
+		if (results2.size() != 0) {
+			if (oldClass != null) {
+				oldClass.getStudents().remove(s);
 			}
-			session.update(s);
+			s.setSchoolClass(schoolClass);
+			schoolClass.addStudent(s);
+			s.setSchool(schoolClass.getSchool());
 		}
+		session.update(s);
 		transaction.commit();
 		
 	}
@@ -216,9 +208,8 @@ public class DatabaseConnector {
 		Query query = session.createQuery(hql);
 		List<Student> results = query.list();
 		Transaction transaction = session.beginTransaction();
-		for (Student s : results) {
-			session.delete(s);
-		}
+		Student s = results.get(0);
+		session.delete(s);
 		transaction.commit();
 	}
 }
