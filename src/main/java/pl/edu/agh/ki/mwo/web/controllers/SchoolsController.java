@@ -68,7 +68,7 @@ public class SchoolsController {
     }
     
     @RequestMapping(value="/DeleteSchool", method=RequestMethod.POST)
-    public String deleteSchool(@RequestParam(value="schoolId", required=false) String schoolId,
+    public String deleteSchool(@RequestParam(value="schoolId", required=false) long schoolId,
     		Model model, HttpSession session) {    	
     	if (session.getAttribute("userLogin") == null)
     		return "redirect:/Login";

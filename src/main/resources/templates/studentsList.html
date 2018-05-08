@@ -33,7 +33,6 @@
 		            	<label>Nazwisko: </label><input type="text" name="studentSurname" th:value="${student.surname}" /><br/>
 		                <label>Pesel: </label><input type="text" name="studentPesel" th:value="${student.pesel}" /><br/>
 		                <label>Klasa: </label><select class="form-control" name="studentSchoolClass" id="studentSchoolClass">
-											   <option id="check" value="-1">---bez zmian---</option>
 											   <option th:each="schoolClass: ${schoolClasses}" th:value="${schoolClass.id}" th:text="${schoolClass.profile} + ', ' + ${schoolClass.school.name} + ', ' + ${schoolClass.school.address}"></option>
 											   </select><br/>
 		                <button type="submit">></button>

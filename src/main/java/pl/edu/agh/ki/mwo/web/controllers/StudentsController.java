@@ -41,7 +41,7 @@ public class StudentsController {
     public String createStudent(@RequestParam(value="studentName", required=false) String name,
     		@RequestParam(value="studentSurname", required=false) String surname,
     		@RequestParam(value="studentPesel", required=false) String pesel,
-    		@RequestParam(value="studentSchoolClass", required=false) String studentSchoolClass,
+    		@RequestParam(value="studentSchoolClass", required=false) long studentSchoolClass,
     		Model model, HttpSession session) {    	
     	if (session.getAttribute("userLogin") == null)
     		return "redirect:/Login";
@@ -78,7 +78,7 @@ public class StudentsController {
     }
 	
 	@RequestMapping(value="/DeleteStudent", method=RequestMethod.POST)
-    public String deleteStudent(@RequestParam(value="studentId", required=false) String studentId,
+    public String deleteStudent(@RequestParam(value="studentId", required=false) long studentId,
     		Model model, HttpSession session) {    	
     	if (session.getAttribute("userLogin") == null)
     		return "redirect:/Login";

@@ -40,7 +40,7 @@ public class SchoolClassesController {
     public String createSchoolClass(@RequestParam(value="schoolClassStartYear", required=false) String startYear,
     		@RequestParam(value="schoolClassCurrentYear", required=false) String currentYear,
     		@RequestParam(value="schoolClassProfile", required=false) String profile,
-    		@RequestParam(value="schoolClassSchool", required=false) String schoolId,
+    		@RequestParam(value="schoolClassSchool", required=false) long schoolId,
     		Model model, HttpSession session) {    	
     	if (session.getAttribute("userLogin") == null)
     		return "redirect:/Login";
@@ -77,7 +77,7 @@ public class SchoolClassesController {
     }
     
     @RequestMapping(value="/DeleteSchoolClass", method=RequestMethod.POST)
-    public String deleteSchoolClass(@RequestParam(value="schoolClassId", required=false) String schoolClassId,
+    public String deleteSchoolClass(@RequestParam(value="schoolClassId", required=false) long schoolClassId,
     		Model model, HttpSession session) {    	
     	if (session.getAttribute("userLogin") == null)
     		return "redirect:/Login";

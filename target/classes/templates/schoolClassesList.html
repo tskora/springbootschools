@@ -31,7 +31,6 @@
 		            	<label>Obecny rok: </label><input type="text" name="schoolClassCurrentYear" th:value="${schoolClass.currentYear}" /><br/>
 		                <label>Profil: </label><input type="text" name="schoolClassProfile" th:value="${schoolClass.profile}" /><br/>
 		                <label>Szkoła: </label><select class="form-control" name="schoolClassSchool" id="schoolClassSchool">
-											   <option id="check" value="-1">---bez zmian---</option>
 											   <option th:each="school: ${schools}" th:value="${school.id}" th:text="${school.name} + ', ' + ${school.address}"></option>
 											   </select><br/>
 		                <button type="submit">></button>

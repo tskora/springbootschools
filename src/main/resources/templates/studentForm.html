@@ -12,7 +12,6 @@
 						<tr><td>nazwisko:</td><td><input type="text" name="studentSurname" /></td></tr>
 						<tr><td>pesel:</td><td><input type="text" name="studentPesel" /></td></tr>
 						<tr><td>klasa:</td><td><select class="form-control" name="studentSchoolClass" id="studentSchoolClass">
-						<option value="-1">---</option>
 					    <option th:each="schoolClass: ${schoolClasses}" th:value="${schoolClass.id}" th:text="${schoolClass.profile} + ', ' + ${schoolClass.currentYear} + ', ' + ${schoolClass.school}"></option>				
 						</select></td></tr>
 					</table><br/><BR/>
