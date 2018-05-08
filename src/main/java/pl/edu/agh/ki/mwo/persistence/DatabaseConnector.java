@@ -67,6 +67,9 @@ public class DatabaseConnector {
 	public void deleteSchool(long schoolId) {
 		Transaction transaction = session.beginTransaction();
 		School s = getSchool(schoolId);
+		for (SchoolClass sc : s.getClasses()) {
+			sc.setSchool(null);
+		}
 		session.delete(s);
 		transaction.commit();
 	}
@@ -117,7 +120,10 @@ public class DatabaseConnector {
 	
 	public void deleteSchoolClass(long schoolClassId) {
 		Transaction transaction = session.beginTransaction();
-		SchoolClass s = getSchoolClass(schoolClassId); 
+		SchoolClass s = getSchoolClass(schoolClassId);
+		for (Student st : s.getStudents()) {
+			st.setSchoolClass(null);
+		}
 		session.delete(s);
 		transaction.commit();
 	}
